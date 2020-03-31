@@ -94,7 +94,7 @@ class GameHeartbeat extends Task {
 			$player->setScoreTag(floor($player->getHealth()) . TF::RED . " ❤");
 			if(!$this->border->isPlayerInsideOfBorder($player)){
 				$this->border->teleportPlayer($player);
-				$player->addTitle("You have been teleported by border!");
+				$player->addTitle("§f§k.§r§a§o§lTeleported to border§r§f§k.");
 			}
 			switch($this->getGameStatus()) {
 				case GameStatus::COUNTDOWN:
@@ -126,22 +126,22 @@ class GameHeartbeat extends Task {
 		switch($this->countdown){
 			case 30:
 				$server->setConfigBool("white-list", true);
-				$server->broadcastTitle("Server has been " . TF::AQUA . "whitelisted!");
-				$server->broadcastTitle("The game will begin in " . TF::AQUA . "30 seconds.");
+				$server->broadcastTitle("§f§k.§r§o§l§eServer has been " . TF::AQUA . "§ewhitelisted!§r§f§k.");
+				$server->broadcastTitle("§f§k.§r§b§o§lBegin in " . TF::AQUA . "§b30 seconds.§r§f§k.");
 				break;
 			case 29:
-				$server->broadcastTitle("Global Mute has been " . TF::AQUA . "enabled!");
+				$server->broadcastTitle("§f§k.§r§c§o§lGlobal Mute on.§r§f§k.");
 				$this->getPlugin()->setGlobalMute(true);
 				break;
 			case 10:
-				$server->broadcastTitle("The game will begin in " . TF::AQUA . "10 seconds.");
+				$server->broadcastTitle("§f§k.§r§o§b§lStarting in 10 seconds.§r§f§k.");
 				break;
 			case 5:
 			case 4:
 			case 3:
 			case 2:
 			case 1:
-				$server->broadcastTitle("The game will begin in " . TF::AQUA . "$this->countdown second(s).");
+				$server->broadcastTitle("§f§k.§r§o§l§bStarting in " . TF::AQUA . "$this->countdown second(s).§r§f§k.");
 				break;
 			case 0:
 				foreach($this->getPlugin()->getServer()->getDefaultLevel()->getEntities() as $entity){
@@ -151,7 +151,7 @@ class GameHeartbeat extends Task {
 				}
 				$ev = new UHCStartEvent($this->getPlugin()->getGamePlayers());
 				$ev->call();
-				$server->broadcastTitle(TF::RED . TF::BOLD . "The UHC has begun!");
+				$server->broadcastTitle(TF::RED . TF::BOLD . "§f§k.§r§a§o§lGO!§r§f§k.");
 				$this->setGameStatus(GameStatus::GRACE);
 				$this->countdown = 30;
 				break;
@@ -164,37 +164,37 @@ class GameHeartbeat extends Task {
 		$server = $this->getPlugin()->getServer();
 		switch($this->grace){
 			case 1190:
-				$server->broadcastTitle("Global Mute has been " . TF::AQUA . "disabled!");
+				$server->broadcastTitle("§f§k.§r§c§o§lGlobal Mute off.§r§f§k.");
 				$this->getPlugin()->setGlobalMute(false);
-				$server->broadcastTitle("Final heal will occur in " . TF::AQUA . "10 minutes.");
+				$server->broadcastTitle("§f§k.§r§o§l§bFinal heal in " . TF::AQUA . "10 minutes.§r§f§k.");
 				break;
 			case 601:
-				$server->broadcastTitle("Final heal has " . TF::AQUA . "occurred!");
+				$server->broadcastTitle("§f§k.§r§o§l§bFinal heal has been given.§r§f§k.");
 				break;
 			case 600:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in 10 minutes.");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§bPvP in 10 mins.§r§f§k.");
 				break;
 			case 300:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in 5 minutes.");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§bPvP in 5 mins.§r§f§k.");
 				break;
 			case 60:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in 1 minute.");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§bPvP in 1 min.§r§f§k.");
 				break;
 			case 30:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in 30 seconds.");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§bPvP in 30 sec.§r§f§k.");
 				break;
 			case 10:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in 10 seconds.");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§bPvP in 10 sec.§r§f§k.");
 				break;
 			case 5:
 			case 4:
 			case 3:
 			case 2:
 			case 1:
-				$server->broadcastTitle(TF::RED . "PvP will be enabled in $this->grace second(s).");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§c $this->grace §r§f§k.");
 				break;
 			case 0:
-				$server->broadcastTitle(TF::RED . "PvP has been enabled, good luck!");
+				$server->broadcastTitle(TF::RED . "§f§k.§r§o§l§cPvP on!§r§f§k.");
 				$this->setGameStatus(GameStatus::PVP);
 				$this->grace = 60 * 20;
 				break;
@@ -206,19 +206,19 @@ class GameHeartbeat extends Task {
 		$server = $this->getPlugin()->getServer();
 		switch($this->pvp){
 			case 900:
-				$server->broadcastTitle("The border will shrink to " . TF::AQUA . "750" . TF::WHITE . " in " . TF::AQUA . "5 minutes");
+				$server->broadcastTitle("§f§k.§rThe border will shrink to " . TF::AQUA . "750" . TF::WHITE . " in " . TF::AQUA . "5 minutes.§r§f§k.");
 				break;
 			case 600:
 				$this->border->setSize(750);
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "500" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "500" . TF::WHITE . " in " . TF::AQUA . "5 minutes.§r§f§k.");
 				break;
 			case 300:
 				$this->border->setSize(500);
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "250" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "250" . TF::WHITE . " in " . TF::AQUA . "5 minutes.§r§f§k.");
 				break;
 			case 0:
 				$this->border->setSize(250);
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "100" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "100" . TF::WHITE . " in " . TF::AQUA . "5 minutes.§r§f§k.");
 				$this->setGameStatus(GameStatus::NORMAL);
 				$this->pvp = 60 * 30;
 				break;
@@ -232,17 +232,17 @@ class GameHeartbeat extends Task {
 			case 3300:
 				$this->border->setSize(100);
 				$this->border->build();
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "25" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "25" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
 				break;
 			case 3000:
 				$this->border->setSize(25);
 				$this->border->build();
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "10" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".\nShrinking to " . TF::AQUA . "10" . TF::WHITE . " in " . TF::AQUA . "5 minutes.");
 				break;
 			case 2700:
 				$this->border->setSize(10);
 				$this->border->build();
-				$server->broadcastTitle("The border has shrunk to " . TF::AQUA . $this->border->getSize() . ".");
+				$server->broadcastTitle("§f§k.§rThe border has shrunk to " . TF::AQUA . $this->border->getSize() . ".");
 				break;
 		}
 	}
