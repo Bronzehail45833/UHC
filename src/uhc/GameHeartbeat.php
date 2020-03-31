@@ -255,7 +255,7 @@ class GameHeartbeat extends Task {
 			}
 			if($this->hasStarted()){
 				$session->getScoreboard()->setLineArray([
-					1 => "§7---------------------",
+					1 => "§7[§5§o§lAzure UHC§r§7]",
 					2 => " §bGame Time: §f" . gmdate("H:i:s", $this->game),
 					3 => " §bRemaining: §f" . count($this->getPlugin()->getGamePlayers()),
 					4 => " §bEliminations: §f" . $this->getPlugin()->getEliminations($p),
@@ -265,7 +265,7 @@ class GameHeartbeat extends Task {
 				]);
 			}else{
 				$session->getScoreboard()->setLineArray([
-					1 => "§7---------------------",
+					1 => "§7[§5§o§lAzure UHC§r§7]",
 					2 => " §bPlayers: §f" . count($this->getPlugin()->getGamePlayers()),
 					3 => $this->getGameStatus() === GameStatus::WAITING ? "§b Waiting for players..." : "§b Starting in:§f $this->countdown",
 					4 => "§7--------------------- "
