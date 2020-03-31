@@ -40,10 +40,10 @@ class UHCCommand extends PluginCommand{
 		$form->addButton("Start UHC", function(Player $player, $data){
 			if($data === 0){
 				if($this->getLoader()->getHeartbeat()->hasStarted()){
-					$player->sendMessage(TextFormat::RED . "UHC already started!");
+					$player->sendMessage(TextFormat::RED . "§c# §o§lUHC already started!");
 				}else{
 					$this->getLoader()->getHeartbeat()->setGameStatus(GameStatus::COUNTDOWN);
-					$player->sendMessage(TextFormat::GREEN . "The UHC has been started successfully!");
+					$player->sendMessage(TextFormat::GREEN . "§a# §o§lThe UHC has been started successfully!");
 				}
 			}
 		});
@@ -60,10 +60,10 @@ class UHCCommand extends PluginCommand{
 			if($data === 2){
 				if(!$this->plugin->isGlobalMuteEnabled()){
 					$this->plugin->setGlobalMute(true);
-					$this->plugin->getServer()->broadcastMessage(TextFormat::GREEN . "Chat has been disabled by an admin!");
+					$this->plugin->getServer()->broadcastMessage(TextFormat::GREEN . "§c# §o§lChat has been disabled by an admin!");
 				}else{
 					$this->plugin->setGlobalMute(false);
-					$this->plugin->getServer()->broadcastMessage(TextFormat::GREEN . "Chat has been enabled by an admin!");
+					$this->plugin->getServer()->broadcastMessage(TextFormat::GREEN . "§a# §o§lChat has been enabled by an admin!");
 				}
 			}
 		});
