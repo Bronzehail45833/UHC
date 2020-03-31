@@ -19,7 +19,7 @@ class SpectatorCommand extends PluginCommand{
 	public function __construct(Loader $plugin){
 		parent::__construct("spectate", $plugin);
 		$this->plugin = $plugin;
-		$this->setUsage("/spectate <playerName>");
+		$this->setUsage("§e# /spectate <playerName>");
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
@@ -34,19 +34,19 @@ class SpectatorCommand extends PluginCommand{
 				$player = $this->plugin->getServer()->getPlayer(strtolower($args[0]));
 				if($player !== null){
 					if($player === $sender){
-						$sender->sendMessage(TextFormat::RED . "You can't spectate yourself!");
+						$sender->sendMessage(TextFormat::RED . "§c# You can't spectate yourself!");
 					}else{
 						$sender->teleport($player->getPosition());
 						$sender->sendMessage(TextFormat::GREEN . "Now spectating: " . $player->getDisplayName());
 					}
 				}else{
-					$sender->sendMessage(TextFormat::RED . "That player is offline!");
+					$sender->sendMessage(TextFormat::RED . "§c# That player is offline!");
 				}
 			}else{
 				throw new InvalidCommandSyntaxException();
 			}
 		}else{
-			$sender->sendMessage(TextFormat::RED . "You must be in spectator mode to use this command!");
+			$sender->sendMessage(TextFormat::RED . "§c# You must be in spectator mode to use this command!");
 		}
 
 		return true;
