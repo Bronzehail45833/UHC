@@ -39,7 +39,7 @@ class EventListener implements Listener{
 	public function handleChat(PlayerChatEvent $ev) : void{
 		$player = $ev->getPlayer();
 		if($this->getPlugin()->isGlobalMuteEnabled() && !$player->isOp()){
-			$player->sendMessage(TF::RED . "You cannot talk right now!");
+			$player->sendMessage(TF::RED . "§c# You cannot talk right now!");
 			$ev->setCancelled(true);
 		}elseif($player->getGamemode() === Player::SPECTATOR){
 			$ev->setFormat(TF::GRAY . "SPEC " . TF::WHITE . $player->getName() . TF::GRAY . ": " . TF::WHITE . $ev->getMessage());
@@ -106,7 +106,7 @@ class EventListener implements Listener{
 		$player = $ev->getPlayer();
 		$cause = $player->getLastDamageCause();
 		$player->setGamemode(3);
-		$player->addTitle(TF::YELLOW . "You have been eliminated!", "Use /spectate to spectate a player.");
+		$player->addTitle(TF::YELLOW . "§c# §o§lYou have been eliminated!", "§r§e #Use /spectate to spectate a player.");
 		$player->getLevel()->broadcastLevelSoundEvent($player, LevelSoundEventPacket::SOUND_RAID_HORN);
 		if($cause instanceof EntityDamageByEntityEvent){
 			$damager = $cause->getDamager();
